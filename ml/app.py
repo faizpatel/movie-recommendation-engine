@@ -60,13 +60,13 @@ def fetch_poster(movie_id):
 @app.route('/home', methods=["POST","GET"])
 @app.route('/',methods=["POST","GET"])
 def index():
-    # if request.method == "POST":
-    #     user = request.form["movie_input"]
-    #     return redirect(url_for("reco", movie_name=user))
-    # else:
-    #     suggestions = titles_list
-    #     return render_template('home.html',suggestions = suggestions)
-    return "hello"
+    if request.method == "POST":
+        user = request.form["movie_input"]
+        return redirect(url_for("reco", movie_name=user))
+    else:
+        suggestions = titles_list
+        return render_template('home.html',suggestions = suggestions)
+
 
 
 @app.route('/<movie_name>')
@@ -85,7 +85,7 @@ def reco(movie_name):
       posters.append(fetch_poster(i))
     return render_template('reco.html',movies = movies, posters=posters, movie_name = movie_name, plots = plots, homepages=homepages)
 
-@app.route('/about')
+@app.route('/aboutsss')
 def about_page():
     return render_template('about.html')
 

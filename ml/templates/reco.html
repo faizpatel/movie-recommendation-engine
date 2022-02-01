@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+
+<center>
+    <h1 style ="margin-top:0.5em"> Showing recommendations for {{movie_name}}</h1>
+    {%for i in range(1,6)%}
+    <h1  style = " font-size: 20px;float: left; width: 18%; margin-right: 1%; margin-left: 1%; margin-top: 2em"> {{movies[i]}} </h1>
+    {%endfor%}
+ <p style = "color: #212121">|</p>
+    {%for i in range(1,6)%}
+        <a href = "{{homepages[i]}}"><img class = "img" src="{{posters[i]}}" style = "float: left; width: 18%; margin-top:0.1em; margin-right: 1%;
+        margin-left: 1%;"/>  </a>
+    {%endfor%}
+ <p style = "font-size: 1;color: #212121">|</p>
+    {%for i in range(1,6)%}
+    <p  style = "font-size: 16px; color: grey;float: left; width: 18%; margin-right: 1%; margin-left: 1%; margin-top: 1em"> {{plots[i]}} </p>
+    {%endfor%}
+<center>
+{% endblock %}
+
+
+{% block style %}
+
+img{
+opacity:1;
+filter:alpha(opacity=1);
+}
+
+img:hover{
+opacity:0.5;
+filter:alpha(opacity=50);
+}
+
+
+{% endblock %}
+
