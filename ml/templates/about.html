@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content%}
+
+<center>
+    <h1 style = "font-size:30px; margin-top:1em;"> Thanks for visiting my website! </h1>
+    <a href = "https://ca.linkedin.com/in/faizpatel">
+    <img class = "img" style = "border-radius:50%; margin-top: 1em;" src = "https://media-exp1.licdn.com/dms/image/C4E03AQF5tykLWR_HKQ/profile-displayphoto-shrink_200_200/0/1590800761485?e=1648684800&v=beta&t=PasIF-t6pwBC3gZ3Jn_cQ_m3btGjGCXm1_HSCsUyuD8">
+    </a>
+    <div class = "newp">
+    <p style = " margin-top: 1em; width: 410px; color:grey;"> Hey there! My name is Faiz Patel and I am a business & computer science student
+        interested and passionate about data science and software development.</p>
+    </div>
+
+
+    <h2 style=" font-size: 27px;margin-top:1em;">About this project:</h2>
+        <p style = " margin-top: 1em; width: 700px; color:grey;"> I'm someone who loves movies, but at the same time am really picky about
+        the ones I watch. After I came accross this dataset containing information relating to 5000 movies,
+        I set out to further develop my understanding of data science, machine learning, and software development principles by building
+        Movie Matcher, a web-based movie recommendation engine.
+        </p> <p></p>
+    <p style = "width: 700px; color:grey;"> The first step was to pull the data into Python and do some preprocessing using Pandas and Numpy.
+        My goal was to organize the data so it would be easier to work with later on.
+    </p>
+    <p style = "width: 700px; color:grey;">Once I had all my data ready to go, I applied some machine learning principles
+        using the scikit-learn library to peform content based filtering. I created a vector for each of the movies based
+        on keywords in its plot, genre, crew, and cast. I then found the cosine similarity between the vectors of each movie, and the
+        rest of the array, creating a 5000x5000 matrix. By sorting in descending order,
+        I found the movies with the highest similarity to itself for every movie.
+    </p>
+
+        <p style = "width: 700px; color:grey;">After building the model in Python, I was ready to develop the web based application.
+            I used the Flask library on python to connect the ML model front-end created using HTML, CSS, and JavaScript.
+            I also used the TMDB Api to scrape movie posters from the web to make the recommendations page more visually appealing.
+    </p>
+    <p style = "width: 700px; color:grey; margin-bottom:5em;">
+        If you have any questions, feel free to reach out to me anywhere below!
+    </p>
+</center>
+
+{% endblock %}
+
+{% block style %}
+img{
+opacity:1;
+filter:alpha(opacity=1);
+}
+
+img:hover{
+opacity:0.5;
+filter:alpha(opacity=50);
+}
+
+{% endblock %}
