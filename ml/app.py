@@ -85,7 +85,7 @@ def reco(movie_name):
       posters.append(fetch_poster(i))
     return render_template('reco.html',movies = movies, posters=posters, movie_name = movie_name, plots = plots, homepages=homepages)
 
-@app.route('/aboutsss')
+@app.route('/about')
 def about_page():
     return render_template('about.html')
 
