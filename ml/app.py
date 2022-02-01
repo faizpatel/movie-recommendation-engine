@@ -1,11 +1,12 @@
 from flask import Flask, render_template, url_for, request, redirect
 import pandas as pd
 import pickle
-
-
+import requests
 
 app = Flask(__name__)
 
+titles = pd.read_csv('titles.csv')
+titles_list = titles['title'].tolist()
 movies = pd.read_csv('tmdb_5000_movies.csv')
 movie_titles = movies['title'].tolist()
 plot_overviews = movies[['title','overview','homepage']]
@@ -51,12 +52,38 @@ def recommend(title):
         x = x + 1
     return reco,id,plots,homepages
 
-print(recommend('Avatar'))
+def fetch_poster(movie_id):
+    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=25f03fbab6a3738b0be8b0299f4cd1fa&language=en-US'.format(movie_id))
+    data = response.json()
+    return "https://image.tmdb.org/t/p/w500/" + data['poster_path']
 
-@app.route('/home')
-@app.route('/')
+@app.route('/home', methods=["POST","GET"])
+@app.route('/',methods=["POST","GET"])
 def index():
-    return "x"
+    # if request.method == "POST":
+    #     user = request.form["movie_input"]
+    #     return redirect(url_for("reco", movie_name=user))
+    # else:
+    #     suggestions = titles_list
+    #     return render_template('home.html',suggestions = suggestions)
+    return "hello"
+
+
+@app.route('/<movie_name>')
+def reco(movie_name):
+    movie_name = movie_name.replace("`","'")
+    movie_name = movie_name.replace("(and)", "&")
+    movies = recommend(movie_name)[0]
+    id = recommend(movie_name)[1]
+    posters = []
+    plots = recommend(movie_name)[2]
+    homepages = recommend(movie_name)[3]
+    for i in range(0,6):
+        if(type(homepages[i]) != type("str")):
+            homepages[i] = "https://www.imdb.com/"
+    for i in id:
+      posters.append(fetch_poster(i))
+    return render_template('reco.html',movies = movies, posters=posters, movie_name = movie_name, plots = plots, homepages=homepages)
 
 @app.route('/about')
 def about_page():
