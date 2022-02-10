@@ -71,19 +71,27 @@ def index():
 
 @app.route('/<movie_name>')
 def reco(movie_name):
-    movie_name = movie_name.replace("`","'")
-    movie_name = movie_name.replace("(and)", "&")
-    movies = recommend(movie_name)[0]
-    id = recommend(movie_name)[1]
-    posters = []
-    plots = recommend(movie_name)[2]
-    homepages = recommend(movie_name)[3]
-    for i in range(0,6):
-        if(type(homepages[i]) != type("str")):
-            homepages[i] = "https://www.imdb.com/"
-    for i in id:
-      posters.append(fetch_poster(i))
-    return render_template('reco.html',movies = movies, posters=posters, movie_name = movie_name, plots = plots, homepages=homepages)
+    found = False
+    if(movie_name in titles_list):
+        found = True
+
+    if(found):
+        movie_name = movie_name.replace("`","'")
+        movie_name = movie_name.replace("(and)", "&")
+        movies = recommend(movie_name)[0]
+        id = recommend(movie_name)[1]
+        posters = []
+        plots = recommend(movie_name)[2]
+        homepages = recommend(movie_name)[3]
+        for i in range(0,6):
+            if(type(homepages[i]) != type("str")):
+                homepages[i] = "https://www.imdb.com/"
+        for i in id:
+          posters.append(fetch_poster(i))
+        return render_template('reco.html',movies = movies, posters=posters, movie_name = movie_name, plots = plots, homepages=homepages)
+    else:
+        return render_template('negative.html', movie_name = movie_name)
+
 
 @app.route('/about')
 def about_page():

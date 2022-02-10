@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content%}
+
+<center>
+    <h1 style = "font-size:30px; margin-top:1em;"> Sorry! We couldn't find any results for "{{movie_name}}". :(</h1>
+    <p></p>
+    <p style = "width: 700px; color:grey;"> Unfortunately, due to hosting constraints from Heroku, the original database containing
+        5000 movies could not be used. This site can only apply the ML algorithm on 1000 movies, however, check out my GitHub for the full code
+        to see the complete project. Thanks!
+    <p> </p>
+
+    <a class="navbar-brand" href="{{ url_for('index') }}">Return to home page?</a>
+
+</center>
+
+{% endblock %}
+
+{% block style %}
+img{
+opacity:1;
+filter:alpha(opacity=1);
+}
+
+img:hover{
+opacity:0.5;
+filter:alpha(opacity=50);
+}
+
+{% endblock %}
